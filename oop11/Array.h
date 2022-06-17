@@ -14,18 +14,38 @@ public:
 		size = 0;
 		T* arr = nullptr;
 	};
-	Array(int size,T first, ...)
+	template<class... Args>
+	Array(T a,Args ... )
 	{
-		int count = size;
-		T* p = &first;
-		this->size = size;
-		arr = new T[size];
-		for(int i =0;i<count;i++)
-		{
-			arr[i] = *p++;
-		}
+		arr = nullptr;
+		size = 0;
+		Add(a,Args...);
+		
 	};
+	template<class... Args>
+	void Add(T a, Args...) {
+		Add(a);
+		return Add(Args...);
+	}
 
+	void Add(T a) 
+	{
+		T* temp = new T[++size];
+		for (int i = 0; i < size-1; i++)
+		{
+			temp[i] = arr[i];
+		}
+		temp[size - 1] = a;
+		delete[]arr;
+		arr = temp;
+	}
+
+
+
+	~Array() 
+	{
+		delete[]arr;
+	}
 	Array& push_back(T temp) 
 	{
 		size++;
@@ -37,7 +57,12 @@ public:
 		tempArr[size - 1] = temp;
 		return *this;
 	};
-
+	void print() 
+	{
+		for (int i = 0; i < size; i++) {
+			cout << arr[i] << endl;
+		}
+	}
 
 
 	int GetSize() 
