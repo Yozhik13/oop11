@@ -9,6 +9,7 @@ int main()
 	int s = 4;
 	Array<int> i2Ar(s,1,2,3,4);
 	cout << "i2Ar.GetSize() " << i2Ar.GetSize() << endl;
+	 
 
 }
 
